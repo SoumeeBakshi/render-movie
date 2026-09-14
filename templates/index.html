@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommender</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; text-align: center; }
+        input[type=text] { padding: 8px; width: 250px; }
+        button { padding: 8px 16px; }
+        ul { text-align: left; display: inline-block; margin-top: 20px; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>🎬 Movie Recommendation System</h1>
+
+    <form action="/predict" method="post">
+        <input type="text" name="movie_name" placeholder="Enter a movie name" value="{{ movie_name or '' }}" required>
+        <button type="submit">Recommend</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if recommendations %}
+        <h3>Movies suggested for you:</h3>
+        <ul>
+            {% for movie in recommendations %}
+                <li>{{ movie }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
